@@ -43,7 +43,7 @@ function MentorPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center p-4 flex-wrap">
+      <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate("../")}

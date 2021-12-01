@@ -19,7 +19,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/batch" element={<Batch />} />
         <Route path="/batch/create" element={<BatchCreate />} />
-        <Route path="/batch/edit/:id/" element={<BatchEdit />} />
+        <Route path="/batch/edit/:batchId/" element={<BatchEdit />} />
         <Route path="/batch/:batchId/" element={<BatchRoutes />}>
           <Route path="" element={<BatchPage />} />
           <Route path="mentor/:mentorId" element={<MentorPage />} />
