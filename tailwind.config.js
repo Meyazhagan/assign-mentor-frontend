@@ -3,13 +3,20 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: (theme) => ({
+        check: "url('./icons/check.svg')",
+      }),
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ["checked"],
+      borderColor: ["checked"],
+      inset: ["checked"],
+    },
   },
   plugins: [],
 };

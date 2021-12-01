@@ -6,7 +6,7 @@ import StudentForm from "../common/StudentForm";
 function StudentEdit() {
   const { update, get } = useContext(StudentContext);
   const navigate = useNavigate();
-  const student_id = useParams().id;
+  const student_id = useParams().studentId;
   const handleSubmit = (values) => {
     update(student_id, values);
     navigate("../");

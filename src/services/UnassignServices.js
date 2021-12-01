@@ -8,7 +8,7 @@ const getAll = () => {
 };
 
 const many = (body, headers) => {
-  return http.patch(`${endPoint}/many`, pick(body, ["studentIds "]), {
+  return http.patch(`${endPoint}/many`, pick(body, ["studentIds"]), {
     headers,
   });
 };

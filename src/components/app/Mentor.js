@@ -22,9 +22,13 @@ function Mentor() {
     navigate(`mentor/edit/${id}`);
   };
 
-  useEffect(() => {
-    fetchAll();
-  }, [batch_id]);
+  useEffect(
+    () => {
+      fetchAll();
+    },
+    // eslint-disable-next-line
+    [batch_id]
+  );
 
   return (
     <div className="w-full">

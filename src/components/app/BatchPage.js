@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import { BatchContext } from "../../context/BatchContext";
 import Mentor from "./Mentor";

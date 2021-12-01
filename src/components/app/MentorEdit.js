@@ -6,7 +6,7 @@ import MentorForm from "../common/MentorForm";
 function MentorEdit() {
   const { update, get } = useContext(MentorContext);
   const navigate = useNavigate();
-  const mentor_id = useParams().id;
+  const mentor_id = useParams().mentorId;
   const handleSubmit = (values) => {
     update(mentor_id, values);
     navigate("../");

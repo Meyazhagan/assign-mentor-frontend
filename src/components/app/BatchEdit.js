@@ -5,7 +5,7 @@ import BatchForm from "../common/BatchForm";
 
 function BatchEdit() {
   const { update, get } = useContext(BatchContext);
-  const batchId = useParams().id;
+  const batchId = useParams().batchId;
   const navigate = useNavigate();
   const handleSubmit = (values) => {
     update(batchId, values);

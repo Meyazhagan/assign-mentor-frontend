@@ -23,8 +23,8 @@ function StudentForm({ initialValues, onSubmit, onCancel }) {
         type="text"
         name="name"
         id="name"
-        label="Mentor Name"
-        placeHolder="Enter the mentor name"
+        label="Student Name"
+        placeHolder="Enter the Student name"
         value={formik.values.name}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -69,7 +69,7 @@ function StudentForm({ initialValues, onSubmit, onCancel }) {
           onClick={formik.handleSubmit}
           className="font-bold px-4 py-2 
           hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-          rounded-md text-green-600 focus:outline-none"
+          rounded-md text-green-600"
         >
           Submit
         </button>

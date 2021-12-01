@@ -12,6 +12,7 @@ export const MentorContext = createContext();
 function MentorProvider({ children }) {
   const [mentors, setMentors] = useState([]);
   const [assignedStudents, setAssignedStudents] = useState([]);
+  const [unassignedStudents, setUnAssignedStudents] = useState([]);
   const batch_id = useParams().batchId;
 
   const getIndex = (id) => mentors.findIndex((b) => b._id === id);
@@ -100,13 +101,11 @@ function MentorProvider({ children }) {
     } catch (ex) {}
   };
 
-  const getUnassignedStudents = async (mentorId) => {
+  const getUnassignedStudents = async () => {
     try {
-      const { data: unassigned } = await unassignServices.getAll(mentorId);
-      return unassigned;
-    } catch (ex) {
-      return [];
-    }
+      const { data: unassigned } = await unassignServices.getAll();
+      setUnAssignedStudents(unassigned);
+    } catch (ex) {}
   };
 
   const assignStudents = async (mentorId, studentIds) => {
@@ -114,7 +113,8 @@ function MentorProvider({ children }) {
       pending: "Assigning Students to Mentor",
 
       onSuccess: ({ data }) => {
-        getAssignedStudents();
+        getAssignedStudents(mentorId);
+        getUnassignedStudents();
         return "Assigned Students to Mentor";
       },
 
@@ -124,12 +124,13 @@ function MentorProvider({ children }) {
     });
   };
 
-  const unassignStudents = async (studentIds) => {
+  const unassignStudents = async (mentorId, studentIds) => {
     Toastify(unassignServices.many({ studentIds }), {
       pending: "UnAssigning Students",
 
       onSuccess: ({ data }) => {
-        getAssignedStudents();
+        getAssignedStudents(mentorId);
+        getUnassignedStudents();
         return "UnAssigned the Students";
       },
 
@@ -164,6 +165,7 @@ function MentorProvider({ children }) {
         update,
         remove,
         assignedStudents,
+        unassignedStudents,
         getAssignedStudents,
         getUnassignedStudents,
         assignStudents,

@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
+import { MentorContext } from "../../context/MentorContext";
 import { StudentContext } from "../../context/StudentContext";
 
 function Student() {
   const { students, fetchAll, remove } = useContext(StudentContext);
+  const { get } = useContext(MentorContext);
   const batch_id = useParams().batchId;
   const navigate = useNavigate();
 
@@ -22,9 +24,13 @@ function Student() {
     navigate(`student/edit/${id}`);
   };
 
-  useEffect(() => {
-    fetchAll();
-  }, [batch_id]);
+  useEffect(
+    () => {
+      fetchAll();
+    },
+    // eslint-disable-next-line
+    [batch_id]
+  );
 
   return (
     <div className="w-full">
@@ -46,6 +52,8 @@ function Student() {
                 <th className="p-4">Student Email</th>
                 <th className="p-4">Level</th>
                 <th className="p-4">Course</th>
+                <th className="p-4">Assigned</th>
+                <th className="p-4">To</th>
                 <th className="p-4">Action</th>
               </tr>
             </thead>
@@ -62,6 +70,10 @@ function Student() {
                   <td className="p-4 text-center">{s.email}</td>
                   <td className="p-4 text-center capitalize">{s.level}</td>
                   <td className="p-4 text-center">{s.course}</td>
+                  <td className="p-4 text-center">{s.mentor ? "Yes" : "No"}</td>
+                  <td className="p-4 text-center">
+                    {s.mentor && get(s.mentor)?.name}
+                  </td>
                   <td className=" text-center">
                     <button
                       onClick={() => handleToEdit(s._id)}
