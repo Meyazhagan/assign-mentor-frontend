@@ -1,20 +1,19 @@
 import { useFormik } from "formik";
 import React from "react";
 import Input from "./Input";
+import SelectInput from "./Select";
 
-function StudentForm() {
+function StudentForm({ initialValues, onSubmit, onCancel }) {
   const validate = (values) => {
     const errors = {};
-    if (!values.name) errors.name = "Batch Name is required";
+    if (!values.name) errors.name = "Student Name is required";
+    if (!values.email) errors.email = "Student Email is required";
+    if (!values.level) errors.level = "Level is required";
+    if (!values.course) errors.course = "Course is required";
     return errors;
   };
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      course: "",
-      level: "",
-    },
+    initialValues,
     onSubmit,
     validate,
   });
@@ -42,17 +41,47 @@ function StudentForm() {
         onBlur={formik.handleBlur}
         error={formik.touched.email && formik.errors.email}
       />
-      <Input
-        type="text"
-        name="experience"
-        id="experience"
-        label="Batch experience"
-        placeHolder="Enter the batch experience"
-        value={formik.values.experience}
+      <SelectInput
+        name="level"
+        id="level"
+        label="Level"
+        placeHolder="Select the Level"
+        options={["beginner", "intermediate", "advanced"]}
+        value={formik.values.level}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        error={formik.touched.experience && formik.errors.experience}
+        error={formik.touched.level && formik.errors.level}
       />
+      <Input
+        type="text"
+        name="course"
+        id="course"
+        label="Course"
+        placeHolder="Enter the course"
+        value={formik.values.course}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        error={formik.touched.course && formik.errors.course}
+      />
+      <div className="flex flex-row-reverse">
+        <button
+          type="submit"
+          onClick={formik.handleSubmit}
+          className="font-bold px-4 py-2 
+          hover:bg-gray-100 focus:outline-none focus:bg-gray-100
+          rounded-md text-green-600 focus:outline-none"
+        >
+          Submit
+        </button>
+        <button
+          onClick={onCancel}
+          className="font-bold px-4 py-2 
+          hover:bg-gray-100 focus:bg-gray-100 focus:outline-none
+          rounded-md text-red-600"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

@@ -5,23 +5,23 @@ const endPoint = "/students";
 
 const mentorProps = ["name", "email", "course", "level"];
 
-const getALl = (headers) => {
-  return http.get(`${endPoint}`, { headers });
+const getALl = () => {
+  return http.get(`${endPoint}`);
 };
 
-const get = (id, headers) => {
-  return http.get(`${endPoint}/${id}`, { headers });
+const get = (id) => {
+  return http.get(`${endPoint}/${id}`);
 };
 
-const create = (mentor, headers) => {
-  return http.post(`${endPoint}`, pick(mentor, mentorProps), { headers });
+const create = (mentor) => {
+  return http.post(`${endPoint}`, pick(mentor, mentorProps));
 };
-const update = (mentor, headers) => {
-  return http.put(`${endPoint}`, pick(mentor, mentorProps), { headers });
+const update = (id, mentor) => {
+  return http.put(`${endPoint}/${id}`, pick(mentor, mentorProps));
 };
 
-const remove = (id, headers) => {
-  return http.delete(`${endPoint}/${id}`, { headers });
+const remove = (id) => {
+  return http.delete(`${endPoint}/${id}`);
 };
 
 const methods = { getALl, get, create, update, remove };

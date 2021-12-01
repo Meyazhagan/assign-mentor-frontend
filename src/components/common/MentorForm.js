@@ -82,13 +82,17 @@ function MentorForm({ initialValues, onSubmit, onCancel }) {
         <button
           type="submit"
           onClick={formik.handleSubmit}
-          className="font-bold px-4 py-2 hover:bg-gray-100 rounded-md text-green-600"
+          className="font-bold px-4 py-2 
+          hover:bg-gray-100 focus:bg-gray-100 
+          focus:outline-none rounded-md text-green-600"
         >
           Submit
         </button>
         <button
           onClick={onCancel}
-          className="font-bold px-4 py-2 hover:bg-gray-100 rounded-md text-red-600"
+          className="font-bold px-4 py-2 
+          hover:bg-gray-100 focus:bg-gray-100 
+          focus:outline-none rounded-md text-red-600"
         >
           Cancel
         </button>

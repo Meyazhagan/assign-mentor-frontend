@@ -8,7 +8,7 @@ function MentorCreate() {
   const navigate = useNavigate();
   const handleSubmit = (values) => {
     create(values);
-    navigate(-1);
+    navigate("../");
   };
   return (
     <div className="md:w-4/6 md:mx-auto w-full">
@@ -16,7 +16,7 @@ function MentorCreate() {
       <MentorForm
         initialValues={{ name: "", email: "", role: [], experience: "" }}
         onSubmit={handleSubmit}
-        onCancel={() => navigate(-1)}
+        onCancel={() => navigate("../")}
       />
     </div>
   );

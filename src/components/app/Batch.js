@@ -29,49 +29,53 @@ function Batch() {
       >
         Create New Batch
       </button>
-      <table className="w-full">
-        <thead>
-          <tr className="border-b-4">
-            <th className="p-4">#</th>
-            <th className="p-4 w-full">Batch Name</th>
-            <th className="p-4"></th>
-            <th className="p-4"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {batch.map((b, index) => (
-            <tr className="border-t-2 hover:bg-gray-100" key={index}>
-              <td className="p-4 text-center">{index + 1}</td>
-              <td
-                onClick={() => handleToBatch(b._id)}
-                className="p-4 text-center cursor-pointer hover:text-blue-800 "
-              >
-                {b.name}
-              </td>
+      {batch.length > 0 ? (
+        <table className="w-full">
+          <thead>
+            <tr className="border-b-4">
+              <th className="p-4">#</th>
+              <th className="p-4 w-full">Batch Name</th>
+              <th className="p-4"></th>
+              <th className="p-4"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {batch.map((b, index) => (
+              <tr className="border-t-2 hover:bg-gray-100" key={index}>
+                <td className="p-4 text-center">{index + 1}</td>
+                <td
+                  onClick={() => handleToBatch(b._id)}
+                  className="p-4 text-center cursor-pointer hover:text-blue-800 "
+                >
+                  {b.name}
+                </td>
 
-              <td className=" text-center">
-                <button
-                  onClick={() => handleToEdit(b._id)}
-                  className="font-bold text-green-600 
+                <td className=" text-center">
+                  <button
+                    onClick={() => handleToEdit(b._id)}
+                    className="font-bold text-green-600 
                       hover:bg-gray-200 py-2 px-4
                       rounded-md"
-                >
-                  Edit
-                </button>
-              </td>
-              <td className="text-center pr-4">
-                <button
-                  onClick={() => handleDelete(b._id)}
-                  className="font-bold text-red-600 
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td className="text-center pr-4">
+                  <button
+                    onClick={() => handleDelete(b._id)}
+                    className="font-bold text-red-600 
                   hover:bg-gray-200 px-4 py-2 rounded-md"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="mt-4">There is no Batch Present. Add new Batch.</div>
+      )}
     </div>
     //   </div>
     // </div>
