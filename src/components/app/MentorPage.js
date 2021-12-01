@@ -84,8 +84,8 @@ function MentorPage() {
           )}
         </div>
         <div className="overflow-auto whitespace-nowrap">
-          {unassignedStudents.length > 0 ? (
-            assignToggler && (
+          {assignToggler && (
+             unassignedStudents.length > 0 ? (
               <StudentToMentor
                 students={unassignedStudents}
                 actionLable={"Assign"}
@@ -95,9 +95,9 @@ function MentorPage() {
                 }`}
               />
             )
-          ) : (
+          : (
             <div>There is no UnAssigned Students. All Student has Mentor. </div>
-          )}
+          ))}
         </div>
       </div>
     </div>
