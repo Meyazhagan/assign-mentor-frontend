@@ -4,7 +4,7 @@ import { StudentContext } from "../../context/StudentContext";
 import StudentForm from "../common/StudentForm";
 
 function StudentEdit() {
-  const { update, get } = useContext(StudentContext);
+  const { update, getById } = useContext(StudentContext);
   const navigate = useNavigate();
   const student_id = useParams().studentId;
   const handleSubmit = (values) => {
@@ -15,7 +15,7 @@ function StudentEdit() {
     <div className="md:w-4/6 md:mx-auto w-full">
       <h2 className="text-xl font-bold mb-6">Edit Student</h2>
       <StudentForm
-        initialValues={get(student_id)}
+        initialValues={getById(student_id)}
         onSubmit={handleSubmit}
         onCancel={() => navigate("../")}
       />

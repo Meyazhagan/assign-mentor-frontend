@@ -10,7 +10,7 @@ function StudentProvider({ children }) {
   const [students, setStudents] = useState([]);
   const [current, setCurrent] = useState({});
 
-  const getIndex = (id) => students.findIndex((b) => b._id === id);
+  const getIndex = (id) => students.findIndex((s) => s._id === id);
 
   const fetchAll = async () => {
     try {
@@ -25,6 +25,11 @@ function StudentProvider({ children }) {
       setCurrent(student);
       return student;
     } catch (err) {}
+  };
+
+  const getById = (id) => {
+    const index = getIndex(id);
+    return students[index];
   };
 
   const create = async (student) => {
@@ -127,6 +132,7 @@ function StudentProvider({ children }) {
     <StudentContext.Provider
       value={{
         get,
+        getById,
         fetchAll,
         current,
         students,
