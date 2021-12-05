@@ -5,7 +5,6 @@ import assignServices from "../services/AssignServices";
 import unassignServices from "../services/UnassignServices";
 
 import { Toastify } from "../services/ToastServices";
-import { useParams } from "react-router";
 
 export const MentorContext = createContext();
 
@@ -13,7 +12,6 @@ function MentorProvider({ children }) {
   const [mentors, setMentors] = useState([]);
   const [assignedStudents, setAssignedStudents] = useState([]);
   const [unassignedStudents, setUnAssignedStudents] = useState([]);
-  const batch_id = useParams().batchId;
 
   const getIndex = (id) => mentors.findIndex((b) => b._id === id);
 
@@ -140,13 +138,13 @@ function MentorProvider({ children }) {
     });
   };
 
-  useEffect(
-    () => {
-      fetchAll();
-    },
-    // eslint-disable-next-line
-    [batch_id]
-  );
+  // useEffect(
+  //   () => {
+  //     fetchAll();
+  //   },
+  //   // eslint-disable-next-line
+  //   [batch_id]
+  // );
   useEffect(
     () => {
       fetchAll();

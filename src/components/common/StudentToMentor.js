@@ -66,9 +66,15 @@ function StudentToMentor({ students, onSubmit, actionLable, title }) {
         </thead>
         <tbody>
           {students.map((m, index) => (
-            <tr className="border-t-2 hover:bg-gray-100" key={index}>
+            <tr
+              onClick={(e) => handleChecked(e, m._id)}
+              key={index}
+              className="border-t-2 hover:bg-gray-100 cursor-pointer hover:text-blue-800 "
+            >
               <th>
                 <Check
+                  name={m._id}
+                  id={m._id}
                   onChange={(e) => handleChecked(e, m._id)}
                   checked={isSelected(m._id)}
                 />

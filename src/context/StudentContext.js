@@ -1,13 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Toastify } from "../services/ToastServices";
 import studentServices from "../services/StudentServices";
-import { useParams } from "react-router";
+import assignServices from "../services/AssignServices";
+import unassignServices from "../services/UnassignServices";
 
 export const StudentContext = createContext();
 
 function StudentProvider({ children }) {
   const [students, setStudents] = useState([]);
-  const batch_id = useParams().batchId;
+  const [current, setCurrent] = useState({});
 
   const getIndex = (id) => students.findIndex((b) => b._id === id);
 
@@ -17,10 +18,15 @@ function StudentProvider({ children }) {
       setStudents(students);
     } catch (ex) {}
   };
-  const get = (id) => {
-    const index = getIndex(id);
-    return students[index];
+
+  const get = async (id) => {
+    try {
+      const { data: student } = await studentServices.get(id);
+      setCurrent(student);
+      return student;
+    } catch (err) {}
   };
+
   const create = async (student) => {
     const prevStudents = students;
 
@@ -37,6 +43,7 @@ function StudentProvider({ children }) {
       },
     });
   };
+
   const update = async (id, updatedStudent) => {
     const prevStudents = students;
     const index = getIndex(id);
@@ -55,6 +62,7 @@ function StudentProvider({ children }) {
       },
     });
   };
+
   const remove = async (id) => {
     const prevStudents = students;
     const index = getIndex(id);
@@ -75,16 +83,59 @@ function StudentProvider({ children }) {
     });
   };
 
+  const assign = (studentId, mentorId) => {
+    const prevStudents = students;
+    const body = { mentorId, studentId };
+    Toastify(assignServices.one(body), {
+      pending: "Assigning the Mentor",
+      onSuccess: () => {
+        fetchAll();
+        get(studentId);
+        return "Assigned the Mentor";
+      },
+      onError: (data) => {
+        setStudents(prevStudents);
+        return data?.response?.data?.message || "An Unexpected Error";
+      },
+    });
+  };
+  const unassign = (studentId) => {
+    const prevStudents = students;
+    const body = { studentId };
+    Toastify(unassignServices.one(body), {
+      pending: "Unassigning the Mentor",
+      onSuccess: () => {
+        fetchAll();
+        get(studentId);
+        return "Unassigned the Mentor";
+      },
+      onError: (data) => {
+        setStudents(prevStudents);
+        return data?.response?.data?.message || "An Unexpected Error";
+      },
+    });
+  };
   useEffect(
     () => {
       fetchAll();
     },
     // eslint-disable-next-line
-    [batch_id]
+    []
   );
+
   return (
     <StudentContext.Provider
-      value={{ get, fetchAll, students, create, update, remove }}
+      value={{
+        get,
+        fetchAll,
+        current,
+        students,
+        create,
+        update,
+        remove,
+        assign,
+        unassign,
+      }}
     >
       {children}
     </StudentContext.Provider>

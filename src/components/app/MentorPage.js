@@ -10,9 +10,9 @@ function MentorPage() {
     assignedStudents,
     unassignedStudents,
     getAssignedStudents,
+    getUnassignedStudents,
     unassignStudents: unassign,
     assignStudents: assign,
-    getUnassignedStudents,
     get,
   } = useContext(MentorContext);
   const { get: getBatch } = useContext(BatchContext);
@@ -80,12 +80,12 @@ function MentorPage() {
               title={`Students Assigned to Mentor - ${get(mentor_id)?.name}`}
             />
           ) : (
-            <div>There is no student assigned. </div>
+            <div className="mt-10">There is no student assigned. </div>
           )}
         </div>
         <div className="overflow-auto whitespace-nowrap">
-          {assignToggler && (
-             unassignedStudents.length > 0 ? (
+          {assignToggler &&
+            (unassignedStudents.length > 0 ? (
               <StudentToMentor
                 students={unassignedStudents}
                 actionLable={"Assign"}
@@ -94,10 +94,11 @@ function MentorPage() {
                   getBatch(batch_id)?.name
                 }`}
               />
-            )
-          : (
-            <div>There is no UnAssigned Students. All Student has Mentor. </div>
-          ))}
+            ) : (
+              <div className="mt-10">
+                There is no UnAssigned Students. All Student has Mentor.{" "}
+              </div>
+            ))}
         </div>
       </div>
     </div>

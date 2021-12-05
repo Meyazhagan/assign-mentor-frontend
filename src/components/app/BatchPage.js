@@ -13,14 +13,14 @@ function BatchPage() {
     <div className="space-y-6">
       <div className="flex justify-between">
         <button
-          onClick={() => navigate("/batch")}
-          className="font-bold text-pink-600"
+          onClick={() => navigate("/")}
+          className="font-bold text-red-600
+                hover:bg-gray-200 py-2 px-4
+                rounded-md"
         >
           Back
         </button>
-        <div className="my-4 font-bold text-xl">
-          Batch - {get(batch_id)?.name}
-        </div>
+        <div className=" font-bold text-xl">Batch - {get(batch_id)?.name}</div>
       </div>
       <div className="space-y-10">
         <Mentor />
